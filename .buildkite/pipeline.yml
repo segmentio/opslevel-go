@@ -1,0 +1,18 @@
+env:
+  SEGMENT_CONTEXTS: aws-credentials
+steps:
+  - label: Install dependencies
+    commands:
+      - make deps 
+  
+  - label: Test 
+    commands:
+      - make test
+
+  - label: Build 
+    commands:
+      - make build
+
+  - label: Publish 
+    commands:
+      - make publish
