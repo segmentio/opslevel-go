@@ -46,10 +46,8 @@ func TestCheck(t *testing.T) {
 		defer func() { testServer.Close() }()
 
 		err := client.Check(checkRequest, "uuid")
-		assert.EqualError(t,
-			err,
-			"Bad Request",
-		)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "status 400")
 	})
 
 	t.Run("Returns a Something Went Wrong error on all other status codes", func(t *testing.T) {
@@ -71,10 +69,8 @@ func TestCheck(t *testing.T) {
 		defer func() { testServer.Close() }()
 
 		err := client.Check(checkRequest, "uuid")
-		assert.EqualError(t,
-			err,
-			"Something Went Wrong",
-		)
+		assert.Error(t, err)
+		assert.Contains(t, err.Error(), "status 503")
 	})
 
 	t.Run("Returns an error for an invalid request", func(t *testing.T) {

@@ -58,18 +58,10 @@ func (c *Client) do(method string, path string, body io.Reader, recv interface{}
 
 	c.Logger.Debugf("Received status code %d", resp.StatusCode)
 	if resp.StatusCode != http.StatusAccepted {
-		switch resp.StatusCode {
-		case http.StatusUnprocessableEntity:
-			c.debugFailedResponse(resp)
-			return ErrServiceUnavailable
-		case http.StatusBadRequest:
-			c.debugFailedResponse(resp)
-			return ErrBadRequest
-		default:
-			// catch remaining unhandled errors
-			c.debugFailedResponse(resp)
-			return ErrSWW
-		}
+		buf := new(bytes.Buffer)
+		_, _ = buf.ReadFrom(resp.Body)
+		s := buf.String()
+		return fmt.Errorf("status %d; %s", resp.StatusCode, s)
 	}
 
 	err = decoder.Decode(&recv)
@@ -78,11 +70,4 @@ func (c *Client) do(method string, path string, body io.Reader, recv interface{}
 		return err
 	}
 	return nil
-}
-
-func (c *Client) debugFailedResponse(resp *http.Response) {
-	buf := new(bytes.Buffer)
-	_, _ = buf.ReadFrom(resp.Body)
-	s := buf.String()
-	c.Logger.Debugf("status %d; headers: %v: %s", resp.StatusCode, resp.Header, s)
 }
