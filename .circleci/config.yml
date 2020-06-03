@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/golang:1.14
+    working_directory: /go/src/github.com/segmentio/chamber
+    steps:
+      - checkout
+      - run:
+          name: Check modules are tidy
+          command: |
+            go mod tidy
+            go mod vendor
+            if [ "$(git status --porcelain)" != "" ]; then
+              echo "git tree is dirty after tidying and vendoring modules"
+              echo "ensure go.mod and go.sum are tidy"
+              git status
+              exit 1
+            fi
+      - run:
+          name: Test
+          command: |
+            make test
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
