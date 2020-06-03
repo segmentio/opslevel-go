@@ -14,8 +14,8 @@ The Deploys Integration requires the following fields:
 
 ```
 deployRequest := opslevel.DeployRequest{
-    Service:     "my-service",
-    Description: "my-service was deployed",
+    Service:     "my_service",
+    Description: "my_service was deployed",
     Deployer: rest.Deployer{
         Email: "deployer@myapp.com",
     },
