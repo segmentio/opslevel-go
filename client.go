@@ -3,22 +3,12 @@ package rest
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
 	"net/url"
 
 	log "github.com/sirupsen/logrus"
-)
-
-var (
-	// ErrServiceUnavailable represents a 422
-	ErrServiceUnavailable = errors.New("Service Not Found")
-	// ErrBadRequest represents a 400
-	ErrBadRequest = errors.New("Bad Request")
-	// ErrSWW represents all other http errors
-	ErrSWW = errors.New("Something Went Wrong")
 )
 
 // Client represents a rest http client and is used to send requests to OpsLevel integrations
