@@ -3,7 +3,6 @@ jobs:
   test:
     docker:
       - image: circleci/golang:1.14
-    working_directory: /go/src/github.com/segmentio/chamber
     steps:
       - checkout
       - run:
