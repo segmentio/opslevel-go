@@ -17,15 +17,15 @@ type Deployer struct {
 
 // Commit represents the commit being deployed
 type Commit struct {
-	SHA           string    `json:"sha"`
-	Message       string    `json:"message"`
-	Branch        string    `json:"branch"`
-	Date          time.Time `json:"date"`
-	CommitterName string    `json:"committer_name"`
-	CommiterEmail string    `json:"committer_email"`
-	AuthorName    string    `json:"author_name"`
-	AuthorEmail   string    `json:"author_email"`
-	AuthoringDate time.Time `json:"authoring_date"`
+	SHA            string    `json:"sha"`
+	Message        string    `json:"message"`
+	Branch         string    `json:"branch"`
+	Date           time.Time `json:"date"`
+	CommitterName  string    `json:"committer_name"`
+	CommitterEmail string    `json:"committer_email"`
+	AuthorName     string    `json:"author_name"`
+	AuthorEmail    string    `json:"author_email"`
+	AuthoringDate  time.Time `json:"authoring_date"`
 }
 
 // DeployRequest represents a structured request to the OpsLevel deploys webhook endpoint
