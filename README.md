@@ -35,7 +35,7 @@ The Deploys Integration requires the following fields:
 checkRequest := CheckRequest{
     Service: "my_service",
     Check:   "my_check",
-    Message: "Deployed service",
+    Message: "Checks passed",
     Status:  "passed",
 }
 err := client.Check(checkRequest, "my-integration-uuid")
