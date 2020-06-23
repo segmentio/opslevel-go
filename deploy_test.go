@@ -89,8 +89,7 @@ func TestDeploy(t *testing.T) {
 
 	t.Run("Returns an error for an invalid request", func(t *testing.T) {
 		deployRequest := DeployRequest{
-			Service:     "my_service",
-			Description: "Deployed service",
+			Service: "my_service",
 			Deployer: Deployer{
 				Email: "deployer@xyz.com",
 			},
@@ -108,7 +107,7 @@ func TestDeploy(t *testing.T) {
 		err := client.Deploy(deployRequest, "uuid")
 		assert.EqualError(t,
 			err,
-			"Key: 'DeployRequest.Environment' Error:Field validation for 'Environment' failed on the 'required' tag",
+			"Key: 'DeployRequest.Description' Error:Field validation for 'Description' failed on the 'required' tag",
 		)
 	})
 }

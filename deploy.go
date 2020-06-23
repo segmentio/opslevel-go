@@ -32,9 +32,9 @@ type Commit struct {
 type DeployRequest struct {
 	Service      string    `validate:"required" json:"service"`
 	Deployer     Deployer  `validate:"required" json:"deployer"`
-	Environment  string    `validate:"required" json:"environment"`
 	DeployedAt   time.Time `validate:"required" json:"deployed_at"`
 	Description  string    `validate:"required" json:"description"`
+	Environment  string    `json:"environment"`
 	DeployURL    string    `json:"deploy_url"`
 	DeployNumber string    `json:"deploy_number"`
 	Commit       Commit    `json:"commit"`
