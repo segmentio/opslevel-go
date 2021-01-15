@@ -16,7 +16,7 @@ type CheckRequest struct {
 	Message string `json:"message"`
 }
 
-// Check sends a CheckRequest to the OpsLevel deploy integration at integrationID
+// Check sends a CheckRequest to the OpsLevel check integration at integrationID
 func (c *Client) Check(req CheckRequest, integrationID string) error {
 	v := validator.New()
 	if err := v.Struct(req); err != nil {
