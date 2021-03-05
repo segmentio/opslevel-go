@@ -38,6 +38,7 @@ type DeployRequest struct {
 	DeployURL    string    `json:"deploy_url"`
 	DeployNumber string    `json:"deploy_number"`
 	Commit       Commit    `json:"commit"`
+	DedupID      string    `json:"dedup_id"`
 }
 
 // Deploy sends a DeployRequest to the OpsLevel deploy integration at integrationID
