@@ -18,13 +18,35 @@ type Client struct {
 	Logger     *log.Logger
 }
 
+// ClientOption modifies fields on a Client
+type ClientOption func(c *Client)
+
 // NewClient returns a Client pointer
-func NewClient() *Client {
+func NewClient(opts ...ClientOption) *Client {
 	baseURL, _ := url.Parse("https://app.opslevel.com")
-	return &Client{
+	client := &Client{
 		baseURL:    baseURL,
 		httpClient: &http.Client{},
 		Logger:     log.StandardLogger(),
+	}
+	for _, o := range opts {
+		o(client)
+	}
+	return client
+}
+
+// WithBaseURL modifies the Client baseURL.
+func WithBaseURL(baseURL string) ClientOption {
+	return func(c *Client) {
+		bu, _ := url.Parse(baseURL)
+		c.baseURL = bu
+	}
+}
+
+// WithHTTPClient modifies the Client http.Client.
+func WithHTTPClient(hc *http.Client) ClientOption {
+	return func(c *Client) {
+		c.httpClient = hc
 	}
 }
 
